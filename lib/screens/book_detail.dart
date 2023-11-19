@@ -6,9 +6,8 @@ import 'package:teraki_app_ui/models/book_model.dart';
 import '../providers/theme_provider.dart';
 
 class BookDetailScreen extends StatefulWidget {
-  const BookDetailScreen({
-    super.key,
-  });
+  final BookModel model;
+  const BookDetailScreen({super.key, required this.model});
 
   @override
   State<BookDetailScreen> createState() => _BookDetailScreenState();
@@ -24,20 +23,27 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
         slivers: [
           SliverAppBar(
             backgroundColor: themProvider.isDark ? black : white,
-            title: Text('Title'),
+            title: Text(
+              widget.model.title,
+              style: TextStyle(color: black),
+              overflow: TextOverflow.ellipsis,
+            ),
             shadowColor: Colors.transparent.withOpacity(0.1),
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: blueColor,
+            leading: Padding(
+              padding: EdgeInsets.only(left: 5),
+              child: IconButton(
+                onPressed: () {
+                  finish(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: blueColor,
+                ),
               ),
-              onPressed: () {
-                finish(context);
-              },
             ),
             pinned: true,
             snap: false,
-            floating: true,
+            floating: false,
             expandedHeight: 300,
             actions: [
               Container(
@@ -63,189 +69,202 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
               )
             ],
             flexibleSpace: FlexibleSpaceBar(
-                centerTitle: false,
-                background: Container(
-                    width: double.infinity,
-                    child: Stack(children: [
-                      Image.asset(
-                        'assets/images/' + 'images11.jpg',
-                        fit: BoxFit.fill,
-                        width: double.infinity,
-                      ),
-                      Positioned(
-                          left: 0,
-                          bottom: 0,
-                          child: Container(
-                              width: size.width - 30,
-                              margin: EdgeInsets.only(
-                                  left: 10, bottom: 15, right: 10),
-                              child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
+              centerTitle: false,
+              background: Container(
+                width: double.infinity,
+                child: Stack(
+                  children: [
+                    Image.asset(
+                      'assets/images/' + widget.model.image,
+                      fit: BoxFit.fill,
+                      width: double.infinity,
+                    ),
+                    Positioned(
+                      left: 0,
+                      bottom: 0,
+                      child: Container(
+                        width: size.width - 30,
+                        margin:
+                            EdgeInsets.only(left: 10, bottom: 15, right: 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.model.title,
+                              style: TextStyle(
+                                  color: white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25),
+                            ),
+                            20.height,
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.people,
+                                  color: white,
+                                  size: 20,
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Container(
+                                  child: Text(
+                                    widget.model.author,
+                                    style: TextStyle(color: white),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                )
+                              ],
+                            ),
+                            10.height,
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.record_voice_over,
+                                  color: white,
+                                  size: 20,
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Container(
+                                  child: Text(
+                                    'narrate by',
+                                    style: TextStyle(color: white),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                )
+                              ],
+                            ),
+                            10.height,
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.category,
+                                  color: white,
+                                  size: 20,
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Container(
+                                  child: Text(
+                                    'category',
+                                    style: TextStyle(color: white),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                )
+                              ],
+                            ),
+                            10.height,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      'title',
-                                      style: TextStyle(
-                                          color: white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25),
+                                    Icon(
+                                      Icons.star,
+                                      color: widget.model.rate.toDouble() > 0
+                                          ? yellow
+                                          : gray,
                                     ),
-                                    20.height,
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.people,
-                                          color: white,
-                                          size: 20,
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Container(
-                                          child: Text(
-                                            'autore',
-                                            style: TextStyle(color: white),
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        )
-                                      ],
+                                    Icon(
+                                      Icons.star,
+                                      color: widget.model.rate.toDouble() > 1
+                                          ? yellow
+                                          : gray,
                                     ),
-                                    10.height,
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.record_voice_over,
-                                          color: white,
-                                          size: 20,
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Container(
-                                          child: Text(
-                                            'narrate by',
-                                            style: TextStyle(color: white),
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        )
-                                      ],
+                                    Icon(
+                                      Icons.star,
+                                      color: widget.model.rate.toDouble() > 2
+                                          ? yellow
+                                          : gray,
                                     ),
-                                    10.height,
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.category,
-                                          color: white,
-                                          size: 20,
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Container(
-                                          child: Text(
-                                            'category',
-                                            style: TextStyle(color: white),
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        )
-                                      ],
+                                    Icon(
+                                      Icons.star,
+                                      color: widget.model.rate.toDouble() > 3
+                                          ? yellow
+                                          : gray,
                                     ),
-                                    10.height,
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Icon(
-                                                Icons.star,
-                                                color: yellow,
-                                              ),
-                                              Icon(
-                                                Icons.star,
-                                                color: yellow,
-                                              ),
-                                              Icon(
-                                                Icons.star,
-                                                color: yellow,
-                                              ),
-                                              Icon(
-                                                Icons.star,
-                                                color: yellow,
-                                              ),
-                                              Icon(
-                                                Icons.star,
-                                                color: yellow,
-                                              ),
-                                            ],
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.all(5),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              border: Border.all(
-                                                  color: blueColor, width: 1),
-                                            ),
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.share,
-                                                  color: blueColor,
-                                                ),
-                                                10.width,
-                                                Text(
-                                                  'SHARE',
-                                                  style: TextStyle(
-                                                      color: blueColor),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ])
-                                  ])))
-                    ]))),
+                                    Icon(
+                                      Icons.star,
+                                      color: widget.model.rate.toDouble() > 4
+                                          ? yellow
+                                          : gray,
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  padding: EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border:
+                                        Border.all(color: blueColor, width: 1),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.share,
+                                        color: blueColor,
+                                      ),
+                                      10.width,
+                                      Text(
+                                        'SHARE',
+                                        style: TextStyle(color: blueColor),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
           SliverFillRemaining(
-            hasScrollBody: true,
-            child: DefaultTabController(
-              length: 2,
-              child: Scaffold(
-                appBar: AppBar(
-                  bottom: TabBar(
-                      indicatorColor: blueColor,
-                      labelColor: blueColor,
-                      unselectedLabelColor: themProvider.isDark ? white : black,
-                      tabs: [
-                        Tab(
-                          icon: Icon(
-                            Icons.info_outline,
-                            color: blueColor,
+              hasScrollBody: true,
+              child: DefaultTabController(
+                length: 2,
+                child: Scaffold(
+                  appBar: AppBar(
+                    toolbarHeight: 0,
+                    backgroundColor: themProvider.isDark ? black : white,
+                    bottom: TabBar(
+                        indicatorColor: blueColor,
+                        labelColor: blueColor,
+                        unselectedLabelColor:
+                            themProvider.isDark ? white : black,
+                        tabs: [
+                          Tab(
+                            icon: Icon(
+                              Icons.info_outline,
+                              color: blueColor,
+                            ),
+                            text: 'About',
                           ),
-                          text: 'About',
-                        ),
-                        Tab(
-                          icon: Icon(
-                            Icons.message_outlined,
-                            color: blueColor,
-                          ),
-                          text: 'Reviews',
-                        )
-                      ]),
-                  toolbarHeight: 0,
-                  backgroundColor: themProvider.isDark ? black : white,
-                ),
-                body: TabBarView(children: [
-                  SingleChildScrollView(
-                    child: Container(
-                      margin: EdgeInsets.only(left: 10),
-                      child: Column(
+                          Tab(
+                            icon: Icon(
+                              Icons.message_outlined,
+                              color: blueColor,
+                            ),
+                            text: 'Reviews',
+                          )
+                        ]),
+                  ),
+                  body: TabBarView(children: [
+                    SingleChildScrollView(
+                      child: Container(
+                        margin: EdgeInsets.only(left: 10),
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -459,45 +478,47 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                 ],
                               ),
                             ),
-                            10.height,
+                            15.height,
                             Text(
-                              'Autoreds',
+                              'Authors',
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: blueColor),
+                                  color: blueColor,
+                                  fontWeight: FontWeight.bold),
                             ),
                             10.height,
                             Card(
                               elevation: 5,
                               child: Container(
-                                  height: 70,
-                                  margin: EdgeInsets.only(
-                                      left: 10, right: 10, top: 5, bottom: 5),
-                                  child: Row(children: [
-                                    Icon(
-                                      Icons.person,
-                                      color: gray,
-                                      size: 50,
+                                height: 70,
+                                margin: EdgeInsets.only(
+                                    left: 10, right: 10, top: 5, bottom: 5),
+                                child: Row(children: [
+                                  Icon(
+                                    Icons.person,
+                                    color: gray,
+                                    size: 50,
+                                  ),
+                                  5.width,
+                                  Expanded(
+                                    child: Text(
+                                      widget.model.author,
+                                      style: TextStyle(
+                                          color: blueColor,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                    5.width,
-                                    Expanded(
-                                      child: Text(
-                                        'authore',
-                                        style: TextStyle(
-                                            color: blueColor,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    Icon(Icons.arrow_forward_ios)
-                                  ])),
+                                  ),
+                                  Icon(Icons.arrow_forward_ios_outlined)
+                                ]),
+                              ),
                             ),
-                            10.height,
+                            15.height,
                             Text(
                               'Narrators',
                               style: TextStyle(
                                   color: blueColor,
                                   fontWeight: FontWeight.bold),
                             ),
+                            10.height,
                             Card(
                               elevation: 5,
                               child: Container(
@@ -535,68 +556,78 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                               'teraki',
                               style: secondaryTextStyle(),
                             ),
-                          ]),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                  Container(
-                    height: 50,
-                    child: Card(
-                      elevation: 5,
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  '4.3',
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  '/ 5',
-                                  style: TextStyle(fontSize: 15),
-                                )
-                              ],
-                            ),
-                            Text('Based on 50 reviews'),
-                            10.height,
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.star,
-                                  color: yellow,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: yellow,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: yellow,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: yellow,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: yellow,
-                                ),
-                              ],
-                            ),
-                          ]),
-                    ),
-                  )
-                ]),
-              ),
-            ),
-          )
+                    Container(
+                      height: 50,
+                      child: Card(
+                        elevation: 5,
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    widget.model.rate,
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    '/ 5',
+                                    style: TextStyle(fontSize: 15),
+                                  )
+                                ],
+                              ),
+                              Text('Based on 50 reviews'),
+                              10.height,
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.star,
+                                    color: widget.model.rate.toDouble() > 0
+                                        ? yellow
+                                        : gray,
+                                  ),
+                                  Icon(
+                                    Icons.star,
+                                    color: widget.model.rate.toDouble() > 1
+                                        ? yellow
+                                        : gray,
+                                  ),
+                                  Icon(
+                                    Icons.star,
+                                    color: widget.model.rate.toDouble() > 2
+                                        ? yellow
+                                        : gray,
+                                  ),
+                                  Icon(
+                                    Icons.star,
+                                    color: widget.model.rate.toDouble() > 3
+                                        ? yellow
+                                        : gray,
+                                  ),
+                                  Icon(
+                                    Icons.star,
+                                    color: widget.model.rate.toDouble() > 4
+                                        ? yellow
+                                        : gray,
+                                  ),
+                                ],
+                              ),
+                            ]),
+                      ),
+                    )
+                  ]),
+                ),
+              )),
         ],
       ),
     );

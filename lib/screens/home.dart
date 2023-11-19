@@ -3,6 +3,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:teraki_app_ui/models/book_model.dart';
 import 'package:teraki_app_ui/providers/theme_provider.dart';
+import 'package:teraki_app_ui/screens/book_detail.dart';
 import 'package:teraki_app_ui/utils/slider_wiget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -84,7 +85,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Container(
                       width: size.width * 0.3,
                       margin: const EdgeInsets.only(left: 10),
-                      child: BookItem(model: _recent[index]),
+                      child: BookItem(model: _recent[index]).onTap(() {
+                        BookDetailScreen(model: _recent[index]).launch(context);
+                      }),
                     );
                   }),
             ),
@@ -116,7 +119,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Container(
                       width: size.width * 0.3,
                       margin: const EdgeInsets.only(left: 10),
-                      child: BookItem(model: _bookItem3[index]),
+                      child: BookItem(model: _bookItem3[index]).onTap((){
+                         BookDetailScreen(model: _bookItem3[index]).launch(context);
+                      }),
                     );
                   }),
             ),
@@ -148,7 +153,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Container(
                       width: size.width * 0.3,
                       margin: const EdgeInsets.only(left: 10),
-                      child: BookItem(model: _bookItem1[index]),
+                      child: BookItem(model: _bookItem1[index]).onTap((){
+                         BookDetailScreen(model: _bookItem1[index]).launch(context);
+                      }),
                     );
                   }),
             ),
@@ -180,7 +187,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Container(
                       width: size.width * 0.3,
                       margin: const EdgeInsets.only(left: 10),
-                      child: BookItem(model: _bookItem2[index]),
+                      child: BookItem(model: _bookItem2[index]).onTap((){
+                         BookDetailScreen(model: _bookItem2[index]).launch(context);
+                      }),
                     );
                   }),
             ),
@@ -214,7 +223,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Container(
                       width: size.width * 0.3,
                       margin: const EdgeInsets.only(left: 10),
-                      child: BookItem(model: _bookItem3[index]),
+                      child: BookItem(model: _bookItem3[index]).onTap((){
+                         BookDetailScreen(model: _bookItem3[index]).launch(context);
+                      }),
                     );
                   }),
             )
@@ -558,6 +569,24 @@ class _HomeScreenState extends State<HomeScreen> {
         image: 'images22.jpg',
         isFree: true,
         rate: '5.0'),
+        BookModel(
+        title: 'እንቅልፍ እና ዕድሜ',
+        author: 'በዕውቀቱ ስዩም',
+        image: 'images26.jpg',
+        isFree: true,
+        rate: '5.0'),
+    BookModel(
+        title: 'የጋዜጠኛው ማስታወሻ',
+        author: 'ተስፋዬ ገብረአብ',
+        image: 'images27.jpg',
+        isFree: false,
+        rate: '5.0'),
+    BookModel(
+        title: 'እቴሜቴ ሎሚ ሽታ',
+        author: 'አዳም ረታ',
+        image: 'images24.jpg',
+        isFree: false,
+        rate: '4.0'),
     BookModel(
         title: 'ልጅነት',
         author: 'ዘነበ ወላ',
@@ -576,24 +605,6 @@ class _HomeScreenState extends State<HomeScreen> {
         image: 'images21.jpg',
         isFree: true,
         rate: '5.0'),
-    BookModel(
-        title: 'እንቅልፍ እና ዕድሜ',
-        author: 'በዕውቀቱ ስዩም',
-        image: 'images26.jpg',
-        isFree: true,
-        rate: '5.0'),
-    BookModel(
-        title: 'የጋዜጠኛው ማስታወሻ',
-        author: 'ተስፋዬ ገብረአብ',
-        image: 'images27.jpg',
-        isFree: false,
-        rate: '5.0'),
-    BookModel(
-        title: 'እቴሜቴ ሎሚ ሽታ',
-        author: 'አዳም ረታ',
-        image: 'images24.jpg',
-        isFree: false,
-        rate: '4.0'),
     BookModel(
         title: 'ብርቅርቅታ',
         author: 'ዓቢይ ደምሴ',

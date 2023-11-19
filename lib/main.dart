@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teraki_app_ui/providers/theme_provider.dart';
+import 'package:teraki_app_ui/screens/test.dart';
 import 'package:teraki_app_ui/screens/dashboard.dart';
 import 'package:teraki_app_ui/screens/home.dart';
 
@@ -15,19 +16,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-         ChangeNotifierProvider(create: (_) {
+        ChangeNotifierProvider(create: (_) {
           return ThemeProvider();
         }),
       ],
       child: Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Teraki app',
-            theme: themeProvider.isDark ? ThemeData.dark() : ThemeData.light(),
-            home: DashboardScreen(),
-          );
-        }
-      ),
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Teraki app',
+          theme: themeProvider.isDark ? ThemeData.dark() : ThemeData.light(),
+          home: HomeScreen(),
+        );
+      }),
     );
   }
 }
