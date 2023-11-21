@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teraki_app_ui/providers/theme_provider.dart';
-import 'package:teraki_app_ui/screens/test.dart';
-import 'package:teraki_app_ui/screens/dashboard.dart';
 import 'package:teraki_app_ui/screens/home.dart';
 
 void main() {
