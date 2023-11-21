@@ -4,9 +4,9 @@ The Teraki app UI Clone is a mobil application developed to replicate the user i
 
 # Screenshots
 
-![](https://github.com/cheramilak/tele_birr_ui/blob/main/screenshots/img1.jpg?raw=true)
-![](https://github.com/cheramilak/tele_birr_ui/blob/main/screenshots/img2.jpg?raw=true)
-![](https://github.com/cheramilak/tele_birr_ui/blob/main/screenshots/img3.png?raw=true)
+![](https://github.com/cheramilak/teraki_app_ui_clone/blob/main/screenshots/img1.jpg?raw=true)
+![](https://github.com/cheramilak/teraki_app_ui_clone/blob/main/screenshots/img2.jpg?raw=true)
+![](https://github.com/cheramilak/teraki_app_ui_clone/blob/main/screenshots/img3.png?raw=true)
 
 
 
@@ -20,7 +20,7 @@ The Teraki app UI Clone is a mobil application developed to replicate the user i
 
 Step-1: Download or clone this repository -
 
-    git clone https://github.com/cheramilak/tele_birr_ui.git
+    git clone https://github.com/cheramilak/teraki_app_ui_clone.git
 
 Step-2: Go to project root and execute the following command in console to get the required dependencies -
 
